@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            width: 450px;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .input-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .input-container input[type="text"],
+        .input-container input[type="password"] {
+            width: 100%;
+            padding: 10px 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .input-container input[type="text"]:focus,
+        .input-container input[type="password"]:focus {
+            border-color: #6a11cb;
+        }
+        .input-container input:invalid {
+            border-color: red;
+        }
+        .input-container input:invalid::placeholder {
+            color: red;
+        }
+        .input-container .icon {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            color: #ccc;
+        }
+        .input-container .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #ccc;
+        }
+        .button {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+            display: block;
+            width: 100%;
+        }
+        .button:hover {
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+        }
+        .link {
+            margin-top: 20px;
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+            color: #6a11cb;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up Form</h1>
+        <form id="signupForm">
+            <div class="input-container">
+                <i class="fas fa-user icon"></i>
+                <input type="text" placeholder="Name" id="name" required>
+            </div>
+            <div class="input-container">
+                <i class="fas fa-envelope icon"></i>
+                <input type="text" placeholder="Email Address" id="email" required>
+            </div>
+            <div class="input-container">
+                <i class="fas fa-lock icon"></i>
+                <input type="password" id="password" placeholder="Password" required>
+                <i class="fas fa-eye toggle-password" onclick="togglePassword('password')"></i>
+            </div>
+            <div class="input-container">
+                <i class="fas fa-lock icon"></i>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <i class="fas fa-eye toggle-password" onclick="togglePassword('confirmPassword')"></i>
+            </div>
+            <div id="passwordError" class="error"></div>
+            <button type="submit" class="button">Sign Up</button>
+        </form>
+        <div class="link">
+            <h2>Already have an account? <a href="login.html">Login</a></h2>
+        </div>
+    </div>
+    <script>
+        function togglePassword(id) {
+            var passwordField = document.getElementById(id);
+            var toggleIcon = document.querySelector(`#${id} ~ .toggle-password`);
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.classList.remove("fa-eye");
+                toggleIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                toggleIcon.classList.remove("fa-eye-slash");
+                toggleIcon.classList.add("fa-eye");
+            }
+        }
+
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission for validation
+
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var passwordError = document.getElementById('passwordError');
+
+            if (password !== confirmPassword) {
+                passwordError.textContent = "Passwords do not match.";
+            } else {
+                passwordError.textContent = "";
+                // Submit the form or perform any action
+                alert("Form submitted successfully!");
+                // Uncomment the line below to actually submit the form
+                // this.submit();
+            }
+        });
+    </script>
+</body>
+</html>
